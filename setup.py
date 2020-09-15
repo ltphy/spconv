@@ -23,7 +23,11 @@ remove_plus = torch.__version__.find("+")
 PYTORCH_VERSION = torch.__version__
 if remove_plus != -1:
     PYTORCH_VERSION = torch.__version__[:remove_plus]
-PYTORCH_VERSION = list(map(int, PYTORCH_VERSION.split(".")))
+PYTORCH_VERSION = PYTORCH_VERSION.split(".")
+last_value = PYTORCH_VERSION[-1]
+if(not isinstance(last_value,int)):
+    PYTORCH_VERSION[-1] = 0
+PYTORCH_VERSION = list(map(int,PYTORCH_VERSION))
 PYTORCH_VERSION_NUMBER = PYTORCH_VERSION[0] * 10000 + PYTORCH_VERSION[1] * 100 + PYTORCH_VERSION[2]
 
 class CMakeExtension(Extension):
